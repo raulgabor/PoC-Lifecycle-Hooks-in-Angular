@@ -146,10 +146,12 @@ ngAfterViewChecked works in a similar fashion as ngAfterContentChecked, but afte
 completes the checking of a component's view and child before the changes, and Angular also update the properties decorated with @ViewChild and @ViewChildren property before raising this hook.
 
 ## ngOnDestroy
-When a component is destroyed, the `ngOnDestroy()` hook is invoked. This hook is often used for cleaning operations like unsubscribing from observables and removing event listeners.
+When a component is destroyed, the `ngOnDestroy()` hook is invoked. This hook is often used for cleaning operations like unsubscribing from observables and removing event listeners, cleaning the view before the hook is triggered. If we want to destroy a component, for example, when you place ngIf on a component, and this ngIf then is set to false, at that time, ngIf will remove that component from the DOM and ngOnDestroy is called. This method can be used to do some cleanup work, because this is called right before the objects will be destroyed by Angular.
 
 ```
 ngOnDestroy() {
     console.log('Here is ngOnDestroy!');
   }
 ```
+
+In the example provided, I've created a button which has implemented the method destroy(): `<button (click)="destroy()">Destroy Component</button>` and on the child component I've used an *ngIf (`<app-child-component *ngIf="!isDestroyed">`) which when triggered it should hide the component, meaning the component is removed from the DOM and the hook is fired.
