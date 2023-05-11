@@ -13,8 +13,8 @@ export class AppComponent {
   price: number | undefined;
   product: Product = new Product();
 
-  onUserSubmit(user: HTMLInputElement) {
-    this.colorText = user.value;
+  onColorSubmit(color: HTMLInputElement) {
+    this.colorText = color.value;
   }
 
   updateProduct() {
