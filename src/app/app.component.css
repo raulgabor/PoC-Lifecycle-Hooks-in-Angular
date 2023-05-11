@@ -1,0 +1,42 @@
+h2, h4 {
+  font-family: inherit;
+  text-align: center;
+}
+
+/*h4 {*/
+/*  color: antiquewhite;*/
+/*}*/
+
+/*.container {*/
+/*  display: flex;*/
+/*  background: #008cff;*/
+/*  padding: 2%;*/
+/*  justify-content: center;*/
+/*  width: auto;*/
+/*  align-items: center;*/
+/*}*/
+
+input {
+  margin: 1%;
+  padding: 1%;
+  width: 20%;
+  border: none;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+  border-radius: 5px;
+  font-family: inherit;
+  font-size: 18px;
+}
+
+button {
+  padding: 1%;
+  border: none;
+  font-family: inherit;
+  font-weight: bolder;
+  width: 10%;
+  font-size: 20px;
+  margin: 2%;
+}
+
+button:active {
+  background: aliceblue;
+}

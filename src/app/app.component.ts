@@ -1,10 +1,29 @@
 import { Component } from '@angular/core';
+import { Product } from './child-component/product';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'poc-lifecycle-hooks-in-angular';
+  colorText = '';
+  isDestroyed = false;
+  name: string | undefined;
+  price: number | undefined;
+  product: Product = new Product();
+
+  onUserSubmit(user: HTMLInputElement) {
+    this.colorText = user.value;
+  }
+
+  updateProduct() {
+    this.product = new Product();
+    this.product.name = this.name;
+    this.product.price = this.price;
+  }
+
+  destroy() {
+    this.isDestroyed = true;
+  }
 }
