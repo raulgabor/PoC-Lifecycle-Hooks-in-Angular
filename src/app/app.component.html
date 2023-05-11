@@ -1,7 +1,7 @@
 <h2>Proof of Concept: Lifecycle Hooks in Angular</h2>
 <div class="container">
   <input type="text" #color>
-  <button (click)="onUserSubmit(color)">Submit</button>
+  <button (click)="onColorSubmit(color)">Submit</button>
   <app-child-component [color]="colorText" [product]="product" *ngIf="!isDestroyed">
     <h4 #childContent>This is a test for ngAfterContentInit!</h4>
     <h4 #secondChild>And here it is for ngAfterContentChecked: {{colorText}}</h4>
