@@ -90,12 +90,66 @@ ngAfterContentChecked() {
   }
 ```
 
+So, in the parent component I have this structure:
+ ```
+  <app-child-component [color]="colorText" [product]="product" *ngIf="!isDestroyed">
+    <h4 #childContent>This is a test for ngAfterContentInit!</h4>
+    <h4 #secondChild>And here it is for ngAfterContentChecked: {{colorText}}</h4>
+  </app-child-component>
+ ```
+ 
+And at the second `h4` element, I send to the child a reference through #secondChild and I use the colorText variable to demonstrate the change. In the child component I'm using the ChildContent decorator `@ContentChild('secondChild') secondChild: ElementRef | undefined;` and I'm changing the color through the value I'm passing in the viewer, through an input box.
+
+ 
 ## ngAfterViewInit
 After a component's view is initialized, the `ngAfterViewInit()` hook is invoked. This hook is often used to execute component-specific startup operations. AfterViewInit and AfterViewChecked are hooks that deal with views.
 
+```
+ngAfterViewInit() {
+    console.log('Here is ngAfterViewInit!', this.afterView);
+    this.afterView?.nativeElement.setAttribute(
+      'style',
+      'background-color: red'
+    );
+  }
+```
+
+ngAfterViewInit works in a similar fashion as ngAfterContentInit, but afterViewInit is initialized only after all the component's views and child component's views are fully instantiated. 
+
+```
+<div class="show-color">
+  <p>The color you entered is: {{color}}</p>
+  <h4 #afterView style="text-align: center">Here is a test for ngAfterViewInit!</h4>
+  <h4 #afterViewChecked style="text-align: center">Here is a test for ngAfterViewChecked!</h4>
+  <ng-content></ng-content>
+</div>
+```
+
+It also updates all properties decorated with @ViewChild or @ViewChildren: `@ViewChild('afterView') afterView: ElementRef | undefined;`
+
+So, this HTML structure is similar to the one used in content hooks, but this one is in the child component, so ngAfterViewInit will only be called after this structure is done being rendered in the application.
 
 ## ngAfterViewChecked
 After Angular examines a component's view for changes, the `ngAfterViewChecked()` hook is invoked. This hook is often used to conduct custom change detection logic that is dependent on the view of the component.
 
+```
+  ngAfterViewChecked() {
+    console.log('Here is ngAfterViewChecked!');
+    this.afterViewChecked?.nativeElement.setAttribute(
+      'style',
+      `background-color: ${this.color}`
+    );
+  }
+```
+
+ngAfterViewChecked works in a similar fashion as ngAfterContentChecked, but afterViewChecked is a lifecycle hook that Angular calls after the change detector
+completes the checking of a component's view and child before the changes, and Angular also update the properties decorated with @ViewChild and @ViewChildren property before raising this hook.
+
 ## ngOnDestroy
 When a component is destroyed, the `ngOnDestroy()` hook is invoked. This hook is often used for cleaning operations like unsubscribing from observables and removing event listeners.
+
+```
+ngOnDestroy() {
+    console.log('Here is ngOnDestroy!');
+  }
+```
